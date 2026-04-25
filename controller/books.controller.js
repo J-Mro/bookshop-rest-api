@@ -1,3 +1,4 @@
+const NotFoundError = require("../errors/NotFoundError");
 const {
   getBooks: getBooksService,
   getBookById: getBookByIdService,
@@ -15,7 +16,8 @@ exports.getBooks = async (req, res, next) => {
 exports.getBookById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const book = await getBookByIdService(id);
+    const normBookId = +id;
+    const book = await getBookByIdService(normBookId);
     res.status(200).send(book);
   } catch (err) {
     next(err);
