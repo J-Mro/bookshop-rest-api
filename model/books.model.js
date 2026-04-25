@@ -5,6 +5,6 @@ exports.getBooks = () => {
 };
 
 exports.getBookById = (id) => {
-  const bookById = books.filter((book) => book.id === +id);
+  const bookById = books.filter((book) => book.id === id);
   return bookById[0];
 };
