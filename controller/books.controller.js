@@ -1,6 +1,4 @@
-const books = require("../data/books");
 const { normaliseBookData } = require("../utils/normaliseBookData");
-const NotFoundError = require("../errors/NotFoundError");
 const {
   getBooks: getBooksService,
   getBookById: getBookByIdService,
@@ -44,7 +42,7 @@ exports.patchBook = async (req, res, next) => {
     const { id } = req.params;
     const { available } = req.body;
     const updatedBook = await patchBookService(id, available);
-    res.status(201).send(updatedBook);
+    res.status(200).send(updatedBook);
   } catch (err) {
     next(err);
   }
