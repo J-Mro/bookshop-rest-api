@@ -1,6 +1,7 @@
 const {
   getBooks: getBooksModel,
   getBookById: getBookByIdModel,
+  postBook: postBookModel,
 } = require("../model/books.model");
 const { checkBookExists } = require("../utils/checkBookExists");
 const NotFoundError = require("../errors/NotFoundError");
@@ -15,4 +16,9 @@ exports.getBookById = async (id) => {
   } else {
     return getBookByIdModel(id);
   }
+};
+
+exports.postBook = async (book) => {
+  const response = await postBookModel(book);
+  return response;
 };
