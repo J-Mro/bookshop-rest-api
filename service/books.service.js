@@ -2,6 +2,7 @@ const {
   getBooks: getBooksModel,
   getBookById: getBookByIdModel,
   postBook: postBookModel,
+  patchBook: patchBookModel,
 } = require("../model/books.model");
 const { checkBookExists } = require("../utils/checkBookExists");
 const NotFoundError = require("../errors/NotFoundError");
@@ -21,4 +22,9 @@ exports.getBookById = async (id) => {
 exports.postBook = async (book) => {
   const response = await postBookModel(book);
   return response;
+};
+
+exports.patchBook = async (id, available) => {
+  const updatedBook = await patchBookModel(id, available);
+  return updatedBook;
 };
