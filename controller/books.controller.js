@@ -1,7 +1,10 @@
+const books = require("../data/books");
+const { normaliseBookData } = require("../utils/normaliseBookData");
 const NotFoundError = require("../errors/NotFoundError");
 const {
   getBooks: getBooksService,
   getBookById: getBookByIdService,
+  postBook: postBookService,
 } = require("../service/books.service");
 
 exports.getBooks = async (req, res, next) => {
@@ -19,6 +22,17 @@ exports.getBookById = async (req, res, next) => {
     const normBookId = +id;
     const book = await getBookByIdService(normBookId);
     res.status(200).send(book);
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.postBook = async (req, res, next) => {
+  try {
+    const book = req.body;
+    const normalisedBook = normaliseBookData(book);
+    const response = await postBookService(normalisedBook);
+    res.status(201).send(response);
   } catch (err) {
     next(err);
   }
