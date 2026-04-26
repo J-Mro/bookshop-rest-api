@@ -13,3 +13,13 @@ exports.postBook = (book) => {
   books.push(book);
   return book;
 };
+
+exports.patchBook = (id, available) => {
+  for (const book of books) {
+    if (book.id === +id) {
+      book.available = available;
+      console.log(book);
+      return book;
+    }
+  }
+};
