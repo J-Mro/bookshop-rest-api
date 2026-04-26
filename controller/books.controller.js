@@ -5,6 +5,7 @@ const {
   getBooks: getBooksService,
   getBookById: getBookByIdService,
   postBook: postBookService,
+  patchBook: patchBookService,
 } = require("../service/books.service");
 
 exports.getBooks = async (req, res, next) => {
@@ -33,6 +34,17 @@ exports.postBook = async (req, res, next) => {
     const normalisedBook = normaliseBookData(book);
     const response = await postBookService(normalisedBook);
     res.status(201).send(response);
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.patchBook = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { available } = req.body;
+    const updatedBook = await patchBookService(id, available);
+    res.status(201).send(updatedBook);
   } catch (err) {
     next(err);
   }
